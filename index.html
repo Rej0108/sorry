@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Thoughts 💭</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000 !important;
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* background */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, #1a0000, #000000 80%);
+    z-index: -1;
+}
+
+/* 💓 shake */
+@keyframes heartbeatShake {
+    0% { transform: translate(0px, 0px); }
+    25% { transform: translate(1px, -1px); }
+    50% { transform: translate(-1px, 1px); }
+    75% { transform: translate(1px, 1px); }
+    100% { transform: translate(0px, 0px); }
+}
+.shake {
+    animation: heartbeatShake 0.4s infinite;
+}
+
+/* 💖 glow pulse */
+@keyframes glowPulse {
+    0% {
+        text-shadow:
+            0 0 5px #ff4d6d,
+            0 0 10px #ff4d6d;
+        transform: scale(1);
+    }
+    50% {
+        text-shadow:
+            0 0 15px #ff4d6d,
+            0 0 30px #ff1a4d,
+            0 0 50px #ff1a4d;
+        transform: scale(1.05);
+    }
+    100% {
+        text-shadow:
+            0 0 5px #ff4d6d,
+            0 0 10px #ff4d6d;
+        transform: scale(1);
+    }
+}
+
+/* thoughts */
+.thought {
+    position: absolute;
+    color: #b3b3b3;
+    font-size: 20px;
+    opacity: 0;
+    animation: floatUp 6s linear forwards;
+    filter: blur(1px);
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(60px); opacity: 0; }
+    20% { opacity: 0.9; }
+    100% { transform: translateY(-320px); opacity: 0; }
+}
+
+/* center */
+#centerText {
+    position: absolute;
+    width: 100%;
+    top: 45%;
+    text-align: center;
+    font-size: 30px;
+    color: #ccc;
+    opacity: 0;
+    transition: 2s;
+}
+
+/* 💖 NAME WITH GLOW */
+#nameReveal {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    text-align: center;
+    font-size: 52px;
+    color: #ff4d6d;
+    opacity: 0;
+    transition: 2s;
+    font-family: 'Great Vibes', cursive;
+    animation: glowPulse 2s infinite ease-in-out;
+}
+
+/* heart */
+#heart {
+    position: absolute;
+    width: 100%;
+    top: 57%;
+    text-align: center;
+    font-size: 42px;
+    opacity: 0;
+    transition: 2s;
+}
+
+/* button */
+#btn {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 28px;
+    border-radius: 25px;
+    border: none;
+    background: #ff4d6d;
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+
+/* final */
+#final {
+    position: absolute;
+    width: 100%;
+    top: 62%;
+    text-align: center;
+    font-size: 30px;
+    color: #ff8080;
+    opacity: 0;
+    text-shadow: 0 0 20px #ff4d6d;
+    transition: 1.5s;
+    font-family: 'Great Vibes', cursive;
+}
+
+/* heart container */
+#heartContainer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body id="body">
+
+<div id="heartContainer"></div>
+
+<div id="centerText">Why did I hurt you…</div>
+<div id="nameReveal">AMMU ❤️</div>
+<div id="heart">💔</div>
+<button id="btn">inga click pannae 💖</button>
+<div id="final">aii avlo dha nee en sorry ahh accetp panni kitta jollyy
+    I’m really sorry ammuu… I’ll never hurt you again 😭❤️</div>
+
+<audio id="heartbeat" loop>
+    <source src="heartbeat.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="whisper">
+    <source src="sorry-ammu.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// same JS
+let thoughts = [
+"Why did I hurt her…","I didn’t mean it…","She means everything to me…",
+"I miss her so much…","What if I lose her…","I just want her back…",
+"Please understand me…","I love her…","I can't stay without her…",
+"I messed everything up…","I regret everything…","Please forgive me…"
+];
+
+function createThought(){
+    let t = document.createElement("div");
+    t.className = "thought";
+    t.innerText = thoughts[Math.floor(Math.random()*thoughts.length)];
+
+    t.style.left = Math.random()*95 + "%";
+    t.style.top = (60 + Math.random()*25) + "%";
+
+    document.body.appendChild(t);
+    setTimeout(()=>{ t.remove(); },6000);
+}
+setInterval(createThought, 250);
+
+setTimeout(()=>{ centerText.style.opacity = 1; },2000);
+setTimeout(()=>{ centerText.style.opacity = 0; },5000);
+setTimeout(()=>{ nameReveal.style.opacity = 1; },6000);
+setTimeout(()=>{ heart.style.opacity = 1; },7000);
+setTimeout(()=>{ btn.style.display = "block"; },9000);
+
+function burst(){
+    const container = document.getElementById("heartContainer");
+    for(let i=0;i<60;i++){
+        let h = document.createElement("div");
+        h.innerText="❤️";
+        h.style.position="absolute";
+        h.style.left="50%";
+        h.style.top="50%";
+        h.style.transform="translate(-50%,-50%)";
+        h.style.transition="1s";
+
+        container.appendChild(h);
+
+        let x = (Math.random()-0.5)*350;
+        let y = (Math.random()-0.5)*350;
+
+        setTimeout(()=>{
+            h.style.transform=`translate(${x}px,${y}px)`;
+            h.style.opacity=0;
+        },50);
+
+        setTimeout(()=>{ h.remove(); },1000);
+    }
+}
+
+btn.onclick = function(){
+    btn.style.display="none";
+    heart.innerText="❤️";
+    burst();
+    final.style.opacity=1;
+    whisper.play().catch(()=>{});
+};
+
+document.body.addEventListener("click", ()=>{
+    heartbeat.play().catch(()=>{});
+    body.classList.add("shake");
+}, {once:true});
+</script>
+
+</body>
+</html>
